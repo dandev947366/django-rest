@@ -32,7 +32,19 @@ class WatchListSerializer(serializers.ModelSerializer):
 class StreamPlatformSerializer(serializers.ModelSerializer):
     # NOTE -  name come from related_name="watchlist" in model
     # show all watchlists in 1 platform category, 1 platform: many movies
-    watchlist = WatchListSerializer(many=True, read_only=True)
+    # watchlist = WatchListSerializer(many=True, read_only=True)
+
+    # NOTE - get movie title only from __str__ function
+    # watchlist = serializers.StringRelatedField(many=True)
+
+    # NOTE - get pk from watchlist
+    # watchlist = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    # NOTE - get links from watchlist
+    # NOTE - view_name comes from urls with endpoint: list/<int:pk>
+    watchlist = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="watchlist-details"
+    )
 
     class Meta:
         model = StreamPlatform
