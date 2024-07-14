@@ -12,7 +12,7 @@ class StreamPlatformAV(APIView):
         platforms = StreamPlatform.objects.all()
         serializer = StreamPlatformSerializer(
             platforms, many=True, context={"request": request}
-        )  # NOTE - context={'request': request} is for add link using HyperlinkedRelatedField
+        )  # NOTE - context={'request': request} is for adding link using HyperlinkedRelatedField
         return Response(serializer.data)
 
     def post(self, request):
