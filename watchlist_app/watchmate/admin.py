@@ -1,4 +1,5 @@
 from django.contrib import admin
-from watchmate.models import Movie
+from watchmate.models import StreamPlatform, WatchList
 
-admin.site.register(Movie)
+admin.site.register(StreamPlatform)
+admin.site.register(WatchList)

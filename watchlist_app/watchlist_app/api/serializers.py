@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from watchmate.models import Movie
+from watchmate.models import StreamPlatform, WatchList
 
 # class MovieSerializer(serializers.Serializer):
 # id = serializers.IntegerField(read_only=True)
@@ -22,29 +22,15 @@ from watchmate.models import Movie
 
 
 # NOTE - Model serializers
-class MovieSerializer(serializers.ModelSerializer):
-    len_name = serializers.SerializerMethodField()
+class WatchListSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Movie
+        model = WatchList
         fields = "__all__"
 
-    def get_len_name(self, object):
-        return len(object.name)
 
-    def validate_name(self, value):
-        if len(value) < 2:
-            raise serializers.ValidationError("Name is too short")
-        else:
-            return value
+class StreamPlatformSerializer(serializers.ModelSerializer):
 
-    def validate(self, data):
-        title = data.get("name")
-        description = data.get("description")
-
-        if title and description and title == description:
-            raise serializers.ValidationError(
-                "Title and Description should be different"
-            )
-
-        return data
+    class Meta:
+        model = StreamPlatform
+        fields = "__all__"
