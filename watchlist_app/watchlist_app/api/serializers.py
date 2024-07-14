@@ -21,7 +21,7 @@ from watchmate.models import StreamPlatform, WatchList
 #     return instance
 
 
-# NOTE - Model serializers
+# NOTE - ModelSerializer
 class WatchListSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -30,6 +30,9 @@ class WatchListSerializer(serializers.ModelSerializer):
 
 
 class StreamPlatformSerializer(serializers.ModelSerializer):
+    # NOTE -  name come from related_name="watchlist" in model
+    # show all watchlists in 1 platform category, 1 platform: many movies
+    watchlist = WatchListSerializer(many=True, read_only=True)
 
     class Meta:
         model = StreamPlatform
